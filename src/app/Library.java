@@ -1,4 +1,8 @@
-class Library {
+package app;
+
+import model.Book;
+
+public class Library {
     public static void main(String[] args) {
         final String appName = "Biblioteka v0.4";
 
