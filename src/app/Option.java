@@ -1,19 +1,16 @@
 package app;
 
+import exception.NoSuchOptionException;
+
 enum Option {
-    EXIT (0, "wyjście z programu"),
-    ADD_BOOK(1, "dodanie nowej książki"),
-    ADD_MAGAZINE(2, "dodanie nowego magazynu"),
-    PRINT_BOOKS(3, "wyświetl dostępne książki"),
-    PRINT_MAGAZINES(4, "wyświetl dostępne magazyny");
+    EXIT(0, "Wyjście z programu"),
+    ADD_BOOK(1, "Dodanie książki"),
+    ADD_MAGAZINE(2,"Dodanie magazynu/gazety"),
+    PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
+    PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet");
 
-    private final int value;
-    private final String description;
-
-    Option(int value, String description) {
-        this.value = value;
-        this.description = description;
-    }
+    private int value;
+    private String description;
 
     public int getValue() {
         return value;
@@ -23,12 +20,21 @@ enum Option {
         return description;
     }
 
-    @Override
-    public String toString() {
-        return  value + " - " + description ;
+    Option(int value, String desc) {
+        this.value = value;
+        this.description = desc;
     }
 
-    static Option createFromInt(int option) {
-        return Option.values()[option];
+    @Override
+    public String toString() {
+        return value + " - " + description;
+    }
+
+    static Option createFromInt(int option) throws NoSuchOptionException {
+        try {
+            return Option.values()[option];
+        } catch(ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id " + option);
+        }
     }
 }
