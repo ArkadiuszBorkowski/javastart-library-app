@@ -1,5 +1,5 @@
 package io.file;
 
 enum FileType {
-    SERIAL
+    SERIAL, CSV
 }
