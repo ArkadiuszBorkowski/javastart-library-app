@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Publication implements Serializable {
+public abstract class Publication implements Serializable, Comparable<Publication> {
     private String title;
     private String publisher;
     private int year;
@@ -14,7 +14,7 @@ public abstract class Publication implements Serializable {
         this.year = year;
     }
 
-    int getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -22,7 +22,7 @@ public abstract class Publication implements Serializable {
         this.year = year;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -30,7 +30,7 @@ public abstract class Publication implements Serializable {
         this.title = title;
     }
 
-    String getPublisher() {
+    public String getPublisher() {
         return publisher;
     }
 
@@ -59,4 +59,10 @@ public abstract class Publication implements Serializable {
     public int hashCode() {
         return Objects.hash(title, publisher, year);
     }
+
+    @Override
+    public int compareTo(Publication p) {
+        return title.compareToIgnoreCase(p.title);
+    }
+
 }

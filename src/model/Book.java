@@ -3,6 +3,7 @@ package model;
 import java.util.Objects;
 
 public class Book extends Publication {
+
     // Pola
     public static final String TYPE = "Książka";
     private String author;
@@ -74,6 +75,5 @@ public class Book extends Publication {
     public int hashCode() {
         return Objects.hash(super.hashCode(), author, pages, isbn);
     }
-
 
 }
