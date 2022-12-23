@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Objects;
 
-abstract class User implements Serializable, CsvConvertible {
+public abstract class User implements Serializable, CsvConvertible {
     private String firstName;
     private String lastName;
     private String pesel;

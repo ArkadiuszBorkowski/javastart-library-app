@@ -25,14 +25,21 @@ class CsvFileManager implements FileManager {
     }
 
     private void importUsers(Library library) {
-        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
+ //       try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(USERS_FILE_NAME))) {
+        /*    while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 LibraryUser libUser = createUserFromString(line);
                 library.addUser(libUser);
-            }
+            }*/
+            bufferedReader.lines()
+                    .map(this::createUserFromString)
+                    .forEach(library:: addUser);
+
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd oczytu pliku " + USERS_FILE_NAME);
         }
     }
 
@@ -45,14 +52,20 @@ class CsvFileManager implements FileManager {
     }
 
     private void importPublications(Library library) {
-        try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
+   /*         while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 Publication publication = createObjectFromString(line);
                 library.addPublication(publication);
-            }
+            }*/
+            bufferedReader.lines()
+                    .map(this::createObjectFromString)
+                    .forEach(library:: addPublication);
+
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd oczytu pliku " + FILE_NAME);
         }
     }
 
