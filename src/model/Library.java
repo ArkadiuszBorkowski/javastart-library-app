@@ -26,6 +26,10 @@ public class Library implements Serializable {
         return list;
     }
 
+    public Optional<Publication> findPublicationByTitle(String title) {
+        return Optional.ofNullable(publications.get(title));
+    }
+
     public Map<String, LibraryUser> getUsers() {
         return users;
     }
